@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <script type="text/javascript" src="src/main.js"></script>
+    </head>
+
+    <body>
+        <div class="full-width full-height d-flex">
+            <div class="full-height d-flex flex-wrap" id="game">
+                <script>
+                    setup(120, 75);
+                    document.getElementById("game").addEventListener('mousedown', clickBoard, false);
+                    document.getElementById("game").addEventListener('mouseover', clickBoard, false);
+                </script>
+            </div>
+            <div class="full-height d-flex center-content padding" id="controller">
+                <button id="step-button" class="playback-button" onclick="updateBoard()">
+                    <img src="./assets/step-button.png" class="playback-button-icon">
+                </button>
+                <div>
+                    <button id="play-button" class="playback-button" onclick="pressPlay()">
+                        <img src="./assets/play-button.png" class="playback-button-icon" id="play-button-icon"/>
+                    </button>
+                    <input id="fps" type="range" min="1" max="30" />
+                </div>
+                <button id="clear-button" class="playback-button" onclick="clearBoard()">
+                    <img src="./assets/clear-button.png" class="playback-button-icon" />
+                </button>
+
+                <script>
+                    function playFrame() {
+                        if (playing) updateBoard();
+                        setTimeout(playFrame, (1000 / document.getElementById("fps").value));
+                    }
+
+                    setTimeout(playFrame, (1000 / document.getElementById("fps").value));
+                </script>
+            </div>
+        </div>
+    </body>
+</html>
